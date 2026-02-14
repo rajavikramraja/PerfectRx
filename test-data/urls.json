@@ -1,0 +1,22 @@
+{
+  "dev": {
+    "escribe": "https://dev.portal.perfectrx.com/",
+    "pom": "https://dev.operations.perfectrx.com/",
+    "api": "https://cwbr0y9pg8.execute-api.us-east-2.amazonaws.com/dev/v1"
+  },
+  "qa": {
+    "escribe": "https://qa.portal.perfectrx.com/",
+    "pom": "https://qa.operations.perfectrx.com/",
+    "api": "https://test.apis.perfectrx.com/v1/"
+  },
+  "stage": {
+    "escribe": "https://stage.portal.perfectrx.com/",
+    "pom": "https://stage.operations.perfectrx.com/",
+    "api": "https://apis.perfectrx.com/v1/"
+  },
+  "prod": {
+    "escribe": "https://portal.perfectrx.com/",
+    "pom": "https://operations.perfectrx.com/",
+    "api": "https://apis.perfectrx.com/v1/"
+  }
+}

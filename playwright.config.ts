@@ -2,11 +2,19 @@ import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
- * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+const env = process.env.ENV || 'qa';
+
+/*  Map of environment URLs */
+const urlMap: { [key: string]: string } = {
+  dev: 'https://dev.portal.perfectrx.com/',
+  qa: 'https://qa.portal.perfectrx.com/',
+  stage: 'https://stage.portal.perfectrx.com/',
+  prod: 'https://portal.perfectrx.com/',
+};
+
+const baseURL = process.env.ESCRIBE_URL || urlMap[env] || 'https://qa.portal.perfectrx.com/';
+console.log(`🔧 Playwright config: ENV=${env}, baseURL=${baseURL}`);
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,7 +34,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: baseURL,
+
+    /* Capture screenshots and video for reporting */
+    screenshot: 'on',
+    video: 'on',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
