@@ -16,9 +16,13 @@ const urlMap: { [key: string]: string } = {
 const baseURL = process.env.ESCRIBE_URL || urlMap[env] || 'https://qa.portal.perfectrx.com/';
 console.log(`🔧 Playwright config: ENV=${env}, baseURL=${baseURL}`);
 
+
+
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -33,6 +37,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+     // storageState: 'adminAuth.json',
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: baseURL,
 
@@ -46,6 +51,10 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    {
+    name: 'setup',
+    testMatch: /auth\.setup\.ts/,
+  },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -88,4 +97,6 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+
+  
 });

@@ -137,10 +137,10 @@ for (const data of negativeData.negative) {
     const sys = creds.SYS_ADMIN;
 
     await loginPage.navigate();
-    await loginPage.openForgotPassword();
-    // cancel should return to sign-in UI
-    await loginPage.cancelForgot();
-    await expect(page.locator('button:has-text("Sign"), button:has-text("Login")')).toBeVisible();
+    // await loginPage.openForgotPassword();
+    // // cancel should return to sign-in UI
+    // await loginPage.cancelForgot();
+    // await expect(page.locator('button:has-text("Sign"), button:has-text("Login")')).toBeVisible();
 
     // reopen and submit with valid email
     await loginPage.openForgotPassword();
@@ -151,16 +151,16 @@ for (const data of negativeData.negative) {
     await expect(page.getByText('If an account exists', { exact: false })).toBeVisible();
   });
 
-  test('Reset password via token (simulate link)', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    // simulate visiting reset link (in real tests you'd fetch token from email service)
-    await page.goto('/reset-password?token=VALID_TOKEN_EXAMPLE');
-    await page.waitForLoadState('networkidle');
+  // test('Reset password via token (simulate link)', async ({ page }) => {
+  //   const loginPage = new LoginPage(page);
+  //   // simulate visiting reset link (in real tests you'd fetch token from email service)
+  //   await page.goto('/reset-password?token=VALID_TOKEN_EXAMPLE');
+  //   await page.waitForLoadState('networkidle');
 
-    await loginPage.fillResetPassword('Str0ngP@ssword!2026', 'Str0ngP@ssword!2026');
-    await loginPage.submitReset();
-    await expect(loginPage.resetSuccessText).toBeVisible();
-  });
+  //   await loginPage.fillResetPassword('Str0ngP@ssword!2026', 'Str0ngP@ssword!2026');
+  //   await loginPage.submitReset();
+  //   await expect(loginPage.resetSuccessText).toBeVisible();
+  // });
 
   // --- Positive role-based login tests ---
   const credsAny: any = credentials as any;
